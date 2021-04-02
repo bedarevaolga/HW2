@@ -1,14 +1,17 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
-public class Car {
-    Color color;
-    final Model model;
-    final int year;
-    WheelSize wheelSize;
-    final EngineVolume engineVolume;
-    String[] optionList = new String[0];
+public abstract class Car {
+    protected Color color;
+    protected final Model model;
+    protected final int year;
+    protected WheelSize wheelSize;
+    protected final EngineVolume engineVolume;
+    protected List<String> optionList = new ArrayList<>();
 
-    public Car(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
+     Car(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
         this.model = model;
         this.color = color;
         this.wheelSize = wheelSize;
@@ -16,43 +19,56 @@ public class Car {
         this.engineVolume = engineVolume;
     }
 
-    public void changeColor(Color newColor) {
-        color = newColor;
+    public void changeColor(Color color) {
+         this.color = color;
     }
 
     public void changeWheels(WheelSize newWheels) {
         wheelSize = newWheels;
     }
 
-    public void addOptionToList(String newOption) {
-        optionList = Arrays.copyOf(optionList, optionList.length + 1);
-        optionList[optionList.length - 1] = newOption;
+    public void addOptionToList(String string) {
+        optionList.add(string);
     }
 
-    public void deleteOptionFromList(String option) {
-        for (int a = 0; a < optionList.length; a++) {
-            if (optionList[a].equalsIgnoreCase(option)) {
-                for (int b = a; b < optionList.length - 1; b++) {
-                    optionList[a] = optionList[a + 1];
-                }
-                optionList = Arrays.copyOf(optionList, optionList.length - 1);
-            }
-        }
+    public void deleteOptionFromList(String string) {
+        optionList.remove(string);
     }
 
-    public void carInformation() {
-        System.out.println("Информация об автомобиле: ");
-        System.out.println("Цвет авто: " + color);
-        System.out.println("модель авто: " + model);
-        System.out.println("год авто: " + year);
-        System.out.println("размер колес: " + wheelSize);
-        System.out.println("объем двигателя: " + engineVolume);
-        if (optionList.length > 0) {
-            System.out.println("Список опций: " + Arrays.toString(optionList));
-        } else {
-            System.out.println("Список опций: отсутствуют");
-        }
-        System.out.println();
+    public String  toString() {
+        return "Информация об автомобиле:" + '\n' +
+                "Цвет авто: " + color +
+                ", модель авто: " + model +
+                ", год авто: " + year +
+                ", размер колес: " + wheelSize +
+                ", объем двигателя: " + engineVolume +
+                (optionList.size() > 0 ? ", список опций: " + optionList : ",список опций: отсутствуют");
+    }
+
+    public boolean compareCarAtWarehouse(Color color, Model model, int year,
+                                         WheelSize wheelSize, EngineVolume engineVolume) {
+        return this.year == year &&
+                this.wheelSize == wheelSize &&
+                this.engineVolume == engineVolume &&
+                this.color == color &&
+                this.model == model;
+    }
+
+    public boolean searchCarForChanges(Color color, Model model, int year,
+                                       WheelSize wheelSize, EngineVolume engineVolume) {
+        return this.year == year &&
+                this.engineVolume == engineVolume &&
+                this.model == model;
+    }
+
+    Color setColor(Color color) {
+        this.color = color;
+        return color;
+    }
+
+    WheelSize setWheelSize(WheelSize wheelSize) {
+        this.wheelSize = wheelSize;
+        return wheelSize;
     }
 }
 
