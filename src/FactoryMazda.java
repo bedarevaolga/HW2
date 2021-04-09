@@ -11,8 +11,17 @@ public class FactoryMazda extends Factory {
     }
 
     public Car createNewCar(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
-        Car newMazda = new CarMazda(color, year, wheelSize, engineVolume);
-        System.out.println("Мы изготовили для вас новый автомобиль," + newMazda.toString());
-        return newMazda;
+        if (year <= 2021 && year >= 2019) {
+            if (color != null && model != null && wheelSize != null && engineVolume != null && year <= 2021 && year >= 2019) {
+                Car newMazda = new CarMazda(color, year, wheelSize, engineVolume);
+                System.out.println("Мы изготовили для вас новый автомобиль:");
+                newMazda.infoAboutCar();
+                return newMazda;
+            } else {
+                throw new NullPointerException();
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

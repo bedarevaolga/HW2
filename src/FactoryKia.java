@@ -11,8 +11,17 @@ public class FactoryKia extends Factory {
     }
 
     public Car createNewCar(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
-        Car newKia = new CarKia(color, year, wheelSize, engineVolume);
-        System.out.println("Мы изготовили для вас новый автомобиль," + newKia.toString());
-        return newKia;
+        if (year <= 2021 && year >= 2019) {
+            if (color != null && model != null && wheelSize != null && engineVolume != null && year <= 2021 && year >= 2019) {
+                Car newKia = new CarKia(color, year, wheelSize, engineVolume);
+                System.out.println("Мы изготовили для вас новый автомобиль:");
+                newKia.infoAboutCar();
+                return newKia;
+            } else {
+                throw new NullPointerException();
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class Car {
     protected Color color;
@@ -9,9 +7,9 @@ public abstract class Car {
     protected final int year;
     protected WheelSize wheelSize;
     protected final EngineVolume engineVolume;
-    protected List<String> optionList = new ArrayList<>();
+    protected List<Option> optionList;
 
-     Car(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
+    Car(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
         this.model = model;
         this.color = color;
         this.wheelSize = wheelSize;
@@ -19,30 +17,64 @@ public abstract class Car {
         this.engineVolume = engineVolume;
     }
 
-    public void changeColor(Color color) {
-         this.color = color;
+    public boolean changeColor(Color color) {
+        if (color != null) {
+            this.color = color;
+            System.out.println("Цвет изменен");
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void changeWheels(WheelSize newWheels) {
+        if (newWheels == null) {
+            throw new NullPointerException();
+        }
         wheelSize = newWheels;
+        System.out.println("Колеса заменены");
     }
 
-    public void addOptionToList(String string) {
-        optionList.add(string);
+    public boolean addOptionToList(Option option) {
+        if (option != null) {
+            if (optionList == null) {
+                optionList = new ArrayList<>();
+            }
+            optionList.add(option);
+            System.out.println("Опция добавлена");
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void deleteOptionFromList(String string) {
-        optionList.remove(string);
+    public boolean deleteOptionFromList(Option option) {
+        if (option != null) {
+            if (optionList != null) {
+                optionList.remove(option);
+                System.out.println("Опция удалена");
+            } else {
+                System.out.println("Список опций пуст.");
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public String  toString() {
-        return "Информация об автомобиле:" + '\n' +
-                "Цвет авто: " + color +
-                ", модель авто: " + model +
-                ", год авто: " + year +
-                ", размер колес: " + wheelSize +
-                ", объем двигателя: " + engineVolume +
-                (optionList.size() > 0 ? ", список опций: " + optionList : ",список опций: отсутствуют");
+    public void infoAboutCar() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Цвет авто: " + color);
+        builder.append(", Марка авто: " + model);
+        builder.append(", Год авто: " + year);
+        builder.append(", Размер колёс авто: " + wheelSize);
+        builder.append(", Объём двигателя авто: " + engineVolume);
+        if (optionList == null || optionList.size() == 0) {
+            builder.append(", Список опций: отсутствуют");
+        } else {
+            builder.append(", Список опций: " + optionList);
+        }
+        System.out.println("Информация об авто: " + builder);
     }
 
     public boolean compareCarAtWarehouse(Color color, Model model, int year,
@@ -54,21 +86,10 @@ public abstract class Car {
                 this.model == model;
     }
 
-    public boolean searchCarForChanges(Color color, Model model, int year,
-                                       WheelSize wheelSize, EngineVolume engineVolume) {
+    public boolean searchCarForChanges(Model model, int year, EngineVolume engineVolume) {
         return this.year == year &&
                 this.engineVolume == engineVolume &&
                 this.model == model;
-    }
-
-    Color setColor(Color color) {
-        this.color = color;
-        return color;
-    }
-
-    WheelSize setWheelSize(WheelSize wheelSize) {
-        this.wheelSize = wheelSize;
-        return wheelSize;
     }
 }
 

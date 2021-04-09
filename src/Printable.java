@@ -1,4 +1,5 @@
 public interface Printable {
-    public void printCarOption();
+
+    void printCarOption();
 
 }

@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class FactoryVolkswagen extends Factory {
-    List<Car> warehouse = new ArrayList<>();
 
     public FactoryVolkswagen(ChangeWheelsService changeWheelsService,
                              ChangeColorService changeColorService,
@@ -13,22 +9,17 @@ public class FactoryVolkswagen extends Factory {
     }
 
     public Car createNewCar(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
-        Car newVolkswagen = new CarVolkswagen(color, year, wheelSize, engineVolume);
-        System.out.println("Мы изготовили для вас новый автомобиль," + newVolkswagen.toString());
-        return newVolkswagen;
-    }
-
-    public Car searchCarAtWarehouse(Color color, Model model, int year,
-                                    WheelSize wheelSize, EngineVolume engineVolume) {
-        for (int i = 0; i < warehouse.size(); i++) {
-            if (warehouse.get(i).compareCarAtWarehouse(color, model, year, wheelSize, engineVolume)) {
-                Car car = warehouse.get(i);
-                warehouse.remove(i);
-                System.out.println("Данное авто есть на складе");
-                return car;
+        if (year <= 2021 && year >= 2019) {
+            if (color != null && model != null && wheelSize != null && engineVolume != null && year <= 2021 && year >= 2019) {
+                Car newVolkswagen = new CarVolkswagen(color, year, wheelSize, engineVolume);
+                System.out.println("Мы изготовили для вас новый автомобиль:");
+                newVolkswagen.infoAboutCar();
+                return newVolkswagen;
+            } else {
+                throw new NullPointerException();
             }
+        } else {
+            throw new IllegalArgumentException();
         }
-        System.out.println("Данного авто нет на складе, но мы его изготовили");
-        return new CarVolkswagen(color, year, wheelSize, engineVolume);
     }
 }

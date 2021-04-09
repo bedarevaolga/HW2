@@ -1,3 +1,4 @@
 public interface WheelChangeable {
-    public void changeWheels(Car car, WheelSize wheelSize);
+
+    boolean changeWheels(Car car, WheelSize wheelSize);
 }
