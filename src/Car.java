@@ -50,7 +50,7 @@ public abstract class Car {
 
     public boolean deleteOptionFromList(Option option) {
         if (option != null) {
-            if (optionList != null) {
+            if (optionList != null || optionList.size() > 0) {
                 optionList.remove(option);
                 System.out.println("Опция удалена");
             } else {
@@ -63,16 +63,21 @@ public abstract class Car {
     }
 
     public void infoAboutCar() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Цвет авто: " + color);
-        builder.append(", Марка авто: " + model);
-        builder.append(", Год авто: " + year);
-        builder.append(", Размер колёс авто: " + wheelSize);
-        builder.append(", Объём двигателя авто: " + engineVolume);
+        StringBuilder builder = new StringBuilder("Цвет авто: ")
+                .append(color)
+                .append(", Марка авто: ")
+                .append(model)
+                .append(", Год авто: ")
+                .append(year)
+                .append(", Размер колёс авто: ")
+                .append(wheelSize)
+                .append(", Объём двигателя авто: ")
+                .append(engineVolume);
         if (optionList == null || optionList.size() == 0) {
             builder.append(", Список опций: отсутствуют");
         } else {
-            builder.append(", Список опций: " + optionList);
+            builder.append(", Список опций: ")
+                    .append(optionList);
         }
         System.out.println("Информация об авто: " + builder);
     }

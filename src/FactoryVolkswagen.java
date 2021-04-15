@@ -4,8 +4,8 @@ public class FactoryVolkswagen extends Factory {
                              ChangeColorService changeColorService,
                              ChangeOption changeOption) {
         super(changeWheelsService, changeColorService, changeOption);
-        warehouse.add(new CarVolkswagen(Color.GREEN, 2020, WheelSize.INCHES19, EngineVolume.MIDSIZE_3000));
-        warehouse.add(new CarVolkswagen(Color.RED, 2021, WheelSize.INCHES17, EngineVolume.MINICAR_1100));
+        warehouse.add(new CarVolkswagen(Color.GREEN, 2020, WheelSize.INCHES_19, EngineVolume.MIDSIZE_3000));
+        warehouse.add(new CarVolkswagen(Color.RED, 2021, WheelSize.INCHES_17, EngineVolume.MINI_CAR_1100));
     }
 
     public Car createNewCar(Color color, Model model, int year, WheelSize wheelSize, EngineVolume engineVolume) {
@@ -15,11 +15,10 @@ public class FactoryVolkswagen extends Factory {
                 System.out.println("Мы изготовили для вас новый автомобиль:");
                 newVolkswagen.infoAboutCar();
                 return newVolkswagen;
-            } else {
-                throw new NullPointerException();
             }
-        } else {
-            throw new IllegalArgumentException();
+            System.out.println("Авто не изготовлено, выберите параметры из списка");
+            return null;
         }
+        throw new IllegalArgumentException();
     }
 }

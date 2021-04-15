@@ -11,10 +11,13 @@ public abstract class Factory implements Printable {
     }
 
     public void printCarOption() {
-        String builder = "Информация о возможных для производства характеристиках" + "\n" +
-                "Выбор цветов автомобиля: " + (Arrays.toString(Color.values())) + "\n" +
-                "Выбор объёма двигателя: " + (Arrays.toString(EngineVolume.values())) + "\n" +
-                "Выбор размера колес: " + (Arrays.toString(WheelSize.values())) + "\n";
+        StringBuilder builder = new StringBuilder("Информация о возможных для производства характеристиках: ")
+                .append("Выбор цветов автомобиля: ")
+                .append(Arrays.toString(Color.values()))
+                .append("Выбор объёма двигателя: ")
+                .append(Arrays.toString(EngineVolume.values()))
+                .append("Выбор размера колес: ")
+                .append(Arrays.toString(WheelSize.values()));
         System.out.println(builder);
     }
 
@@ -45,11 +48,9 @@ public abstract class Factory implements Printable {
                     return checkedCar;
                 }
             }
-            System.out.println("подходящего авто для апгрейда нет");
-            return null;
-        } else {
-            throw new NullPointerException();
         }
+        System.out.println("подходящего авто для апгрейда нет");
+        return null;
     }
 
     public abstract Car createNewCar(Color color, Model model, int year,

@@ -1,8 +1,8 @@
 public enum Option {
 
-    HEATEDSEATS("Подогрев сидений"),
-    AUTOLOCKDOOR("автоблокировка дверей"),
-    TIREPRESSURESENSORS("датчики давления в шинах");
+    HEATED_SEATS("Подогрев сидений"),
+    AUTO_LOCK_DOOR("автоблокировка дверей"),
+    TIRE_PRESSURE_SENSORS("датчики давления в шинах");
 
     private String option;
 

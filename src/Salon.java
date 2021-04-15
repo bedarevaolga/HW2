@@ -3,15 +3,14 @@ public class Salon {
     Car createNewCarOnFactory(Factory factory, Color color, Model model, int year,
                               WheelSize wheelSize, EngineVolume engineVolume) {
         if (year <= 2021 && year >= 2019) {
-        if (color != null && model != null && wheelSize != null && engineVolume != null) {
-            return factory.createNewCar(color, model, year, wheelSize, engineVolume);
-        } else {
-            throw new NullPointerException();
+            if (color != null && model != null && wheelSize != null && engineVolume != null) {
+                return factory.createNewCar(color, model, year, wheelSize, engineVolume);
+            }
+            return null;
         }
-    } else {
-            throw new IllegalArgumentException();
-        }
+        throw new IllegalArgumentException();
     }
+
 
     boolean changeColorInCar(ChangeColorService changeColorService, Car car, Color color) {
         if (changeColorService != null && car != null && color != null) {

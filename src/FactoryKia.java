@@ -17,11 +17,10 @@ public class FactoryKia extends Factory {
                 System.out.println("Мы изготовили для вас новый автомобиль:");
                 newKia.infoAboutCar();
                 return newKia;
-            } else {
-                throw new NullPointerException();
             }
-        } else {
-            throw new IllegalArgumentException();
+            System.out.println("Авто не изготовлено, выберите параметры из списка");
+            return null;
         }
+        throw new IllegalArgumentException();
     }
 }
