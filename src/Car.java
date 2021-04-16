@@ -50,9 +50,13 @@ public abstract class Car {
 
     public boolean deleteOptionFromList(Option option) {
         if (option != null) {
-            if (optionList != null || optionList.size() > 0) {
-                optionList.remove(option);
-                System.out.println("Опция удалена");
+            if (optionList != null && optionList.size() > 0) {
+                if (optionList.contains(option)) {
+                    optionList.remove(option);
+                    System.out.println("Опция удалена");
+                } else {
+                    System.out.println("Такой опции в машине нет, удалить ее невозможно");
+                }
             } else {
                 System.out.println("Список опций пуст.");
             }
